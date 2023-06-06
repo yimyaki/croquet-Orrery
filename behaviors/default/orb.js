@@ -451,6 +451,46 @@ class TickBlipPawn {
     }
     
 }
+
+class SpawnOrreryActor{
+    /*Creates a object capable of spawning other objects. as input, the object needs the data location
+    of both the spawner and the spawnee as well as locaiton, rotatio, ect. data for both.
+    */
+    setup(){
+        this.addEventListener("pointerDown", "spawn");//reflectSpawn");
+        //this.spawn(); // spawn one on startup
+        this.radd = 0.1;
+        this.messages = [];
+    }
+
+    spawn(){
+        ///Spawn an item using parameters from the spawner
+        //add slight variation in spawn location to prevent overlap of multiple spawned objects
+        this.radd+=0.05;
+        let translation = Microverse.v3_add(this.translation, [0, 0, 0]);
+
+        //create spawn
+        this.publish("spawn", "spawn", {
+            name: "spawned_object",
+            type: this._cardData.spawnType,
+            dataRotation: this._cardData.spawnDataRotation,
+            translation,//: this._cardData.dataTranslation,
+            rotation: this._cardData.spawnRotation,
+            dataScale: this._cardData.spawnScale,
+            behaviorModules: this._cardData.spawnBehaviors,
+            layers: ["pointer"],
+            shadow: true,
+            radius: this.radd+this._cardData.radius,
+            thickness: this._cardData.spawnThickness,
+        });
+    }
+}
+class SpawnOrreryPawn{
+    setup(){
+        this.removeEventListener("pointerDoubleDown", "onPointerDoubleDown");
+        this.addEventListener("pointerDoubleDown", "nop");
+    }
+}
 export default {
     modules: [
         {
