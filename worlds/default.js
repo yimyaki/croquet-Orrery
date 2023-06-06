@@ -21,7 +21,7 @@ export function init(Constants) {
 
     Constants.UserBehaviorDirectory = "behaviors/default";
     Constants.UserBehaviorModules = [
-        "csmLights.js","orb.js", "simpleSpin.js", "reflector.js",
+        "csmLights.js","orb.js", "simpleSpin.js", "reflector.js","tour.js"
     ];
 
     Constants.DefaultCards = [
@@ -145,6 +145,38 @@ export function init(Constants) {
                 shadow: true,
                 dataScale: [1, 1, 1],
                 destination: [0, 0, 9]
+
+            }
+        },
+        {
+            card: {
+                name: "tour",
+                type: "object",
+                translation: [10, 0, 0],
+                rotation: [0, 0, 0],
+                behaviorModules: ["Tour"],
+                shadow: true,
+                dataScale: [1, 1, 1],
+                destination: [10, 0, 0],
+                next_loc:[3,0,4],
+                next_rot:[0,0,0,1],
+                text: "start tour: click to go to next station",
+
+            }
+        },
+        {
+            card: {
+                name: "tour",
+                type: "object",
+                translation: [3, 0, 4],
+                rotation: [0, 0, 0],
+                behaviorModules: ["Tour"],
+                shadow: true,
+                dataScale: [1, 1, 1],
+                destination: [3, 0, 4],
+                next_loc:[10,0,0],
+                next_rot:[0,0,0,1],
+                text: "station 2: click to go to next station",
 
             }
         },

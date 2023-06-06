@@ -454,15 +454,6 @@ class TickBlipPawn {
 export default {
     modules: [
         {
-            name: "GlowText",
-            actorBehaviors: [TextActor],
-            pawnBehaviors: [TextPawn]
-        },
-        {
-            name: "QRCode",
-            pawnBehaviors: [QRCodePawn],
-        },
-        {
             name: "Orb",
             actorBehaviors:[OrbActor],
             pawnBehaviors: [OrbPawn],

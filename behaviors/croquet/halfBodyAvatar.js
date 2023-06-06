@@ -4,6 +4,8 @@ class AvatarActor {
         this.say("animationStateChanged");
         this.listen("poseAvatarRequest", "poseAvatar");
         this.listen("setAvatarData", "resetPose");
+
+        this.subscribe("tour","move","nextTour");
     }
 
     poseAvatar(data) {
@@ -15,6 +17,16 @@ class AvatarActor {
         this.lastPose = {type: "move", coordinates: [0, 1, -100], pointing: false};
         this.say("avatarPosed", this.lastPose);
     }
+
+    nextTour(loc){
+        if(loc){
+            this.goto(loc[0],loc[1],true);
+        }
+        else{
+            this.goto([0,0,0],[0,0,0,1],true);
+        }  
+    }
+
 }
 
 class AvatarPawn {

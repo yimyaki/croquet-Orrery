@@ -1,3 +1,21 @@
+class AvatarActor {
+    setup() {
+        this.subscribe("tour","move","nextTour");
+    }
+
+    nextTour(loc){
+        if(loc){
+            this.goTo(loc[0],loc[1],true);
+            //this.translateTo(loc[0]);
+            console.log(loc[0]);
+        }
+        else{
+            console.log("error: no destination for movement");
+            //this.translateTo([0,0,0]);
+            //this.goTo([0,0,0],[0,0,0,1],true);
+        }  
+    }
+}
 class AvatarPawn {
     setup() {
         if (!this.isMyPlayerPawn) {return;}
@@ -28,8 +46,20 @@ class AvatarPawn {
 
         this.addLastResponder("keyUp", {ctrlKey: true}, this);
         this.addEventListener("keyUp", this.keyUp);
+
+        //this.subscribe("tour","move","nextTour");
+        
     }
 
+    nextTour(loc){
+        if(loc){
+            this.goTo(loc[0],loc[1],true);
+        }
+        else{
+            this.goTo([0,0,0],[0,0,0,1],true);
+        }  
+    }
+    
     teardown() {
         if (!this.isMyPlayerPawn) {return;}
         console.log("avatar event handler detached");
@@ -117,6 +147,7 @@ export default {
     modules: [
         {
             name: "AvatarEventHandler",
+            actorBehaviors:[AvatarActor],
             pawnBehaviors: [AvatarPawn],
         },
         {
