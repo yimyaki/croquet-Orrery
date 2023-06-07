@@ -5,7 +5,8 @@ class AvatarActor {
 
     nextTour(loc){
         if(loc){
-            this.goTo(loc[0],loc[1],true);
+            this._target.goTo(loc[0],loc[1],true);
+            //this.goTo(loc[0],loc[1],true);
             //this.translateTo(loc[0]);
             console.log(loc[0]);
         }
