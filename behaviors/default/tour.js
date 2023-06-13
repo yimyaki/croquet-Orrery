@@ -52,9 +52,19 @@ class TextPawn {
             } );
             let dot = new Microverse.THREE.Mesh(geometry, this.material);
             dot.position.set(-2,0,1);
-            dot.rotation.set(0,3.14/2,0)
+            dot.rotation.set(0,3.14/2,0);
             this.shape.add(dot);
         });
+        let plackGeo = new Microverse.THREE.BoxGeometry(.01,0.5,3);
+        let plackMaterial =  new Microverse.THREE.MeshPhysicalMaterial({
+            color: this.actor._cardData.color || 0x994d00, //0xb67e11, //0xd4af37,
+            metalness:1.0,
+            roughness: 0.2,
+        });
+        let plack = new Microverse.THREE.Mesh(plackGeo,plackMaterial);
+        plack.position.set(-2,0,0);
+        plack.rotation.set(0,0,0);
+        this.shape.add(plack);
     }
 
     teardown() {

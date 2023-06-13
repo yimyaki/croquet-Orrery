@@ -159,7 +159,7 @@ export function init(Constants) {
                 shadow: true,
                 dataScale: [1, 1, 1],
                 destination: [10, 0, 0],
-                next_loc:[3,0,4],
+                next_loc:[1,0,0],
                 next_rot:[0,0,0,1],
                 text: "start tour: click to go to next station",
 
@@ -169,18 +169,32 @@ export function init(Constants) {
             card: {
                 name: "tour",
                 type: "object",
-                translation: [3, 0, 4],
+                translation: [1, 0, 0],
                 rotation: [0, 0, 0],
                 behaviorModules: ["Tour"],
                 shadow: true,
                 dataScale: [1, 1, 1],
-                destination: [3, 0, 4],
-                next_loc:[10,0,0],
+                destination: [1, 0, 0],
+                next_loc:[-3,0,4],
                 next_rot:[0,0,0,1],
-                text: "station 2: click to go to next station",
+                text: "station 2:This is the refector. the reflector send out ticks to keep the models syncronized. click to go to next station",
 
             }
         },
-
+        {
+            card: {
+                name: "tour",
+                type: "object",
+                translation: [-3, 0, 4],
+                rotation: [0, 0, 0],
+                behaviorModules: ["Tour"],
+                shadow: true,
+                dataScale: [1, 1, 1],
+                destination: [-3, 0, 4],
+                next_loc:[10,0,0],
+                next_rot:[0,0,0,1],
+                text: "station 3: These orrerys represent the object. each user has one copy on their system which is kept syncronixed through the reflector. click to go to next station",
+            }
+        },
     ];
 }
