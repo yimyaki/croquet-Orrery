@@ -83,19 +83,26 @@ class TextPawn {
     }
     addText(){
         let ctx = this.canvas.getContext("2d");
+        this.clear("#222222");
         ctx.textAlign = "center";
-        ctx.font = "90px Arial";
+        ctx.font = "40px Arial";
         ctx.fillText("this.text", this.canvas.width / 2, 100);
-        ctx.fillStyle = '#FF2222';
+        ctx.fillStyle = "#FF2222";
 
         let color = "#FF2222";
-        let material = this.makePlaneMaterial(this.actor._cardData.depth, color, this.actor._cardData.frameColor, false);
+        //let material = this.makePlaneMaterial(this.actor._cardData.depth, color, this.actor._cardData.frameColor, false);
         //let obj = this.shape.children.find((o) => o.name === "2d");
         //if (!obj || !obj.children || obj.children.length === 0) {
         //    console.log("no kids");
         //    return;}
         //obj = obj.children[0];
-        ctx.material = material;
+       // ctx.material = material;
+       this.texture.needsUpdate = true;
+    }
+    clear(fill) {
+        let ctx = this.canvas.getContext("2d");
+        ctx.fillStyle = fill;
+        ctx.fillRect( 0, 0, this.canvas.width, this.canvas.height );
     }
 }
 
@@ -160,7 +167,8 @@ class TourActor{
             width: 1,
             height: 0.75,
             depth: 0.05,
-            color: 0xff0000,
+            fullBright: false,
+            color: 0xffff00,
             frameColor: 0xff0000,
             cornerRadius: 0.1,
             text: this.text,
