@@ -9,7 +9,7 @@
 
     Snowball contains the code to produce a snowball that is draggable in 2 dimentions.
 */
-class TextActor {
+class GlowTextActor {
     setup() {
         this.text = this._cardData.text;
         this.step();
@@ -22,7 +22,7 @@ class TextActor {
 
 }
 
-class TextPawn {
+class GlowTextPawn {
     setup() {
         this.text = this.actor._cardData.text||"load";
         this.material =  new Microverse.THREE.MeshStandardMaterial({emissive: this.actor._cardData.color || 0xFFFFFF, side: Microverse.THREE.DoubleSide});
@@ -76,6 +76,20 @@ class TextPawn {
 
 }
 
+class TextPawn {
+    setup(){
+        this.text = this.actor._cardData.text||"load";
+        this.addText();
+    }
+    addText(){
+        let ctx = this.canvas.getContext("2d");
+        ctx.textAlign = "center";
+        ctx.font = "90px Arial";
+        ctx.fillText(this.text, this.canvas.width / 2, 100);
+        //ctx.fillStyle = '#FFFFFF';
+    }
+}
+
 class QRCodePawn {
     setup() {
         this.removeEventListener("pointerDoubleDown", "onPointerDoubleDown");
@@ -116,6 +130,29 @@ class TourActor{
             level: 1,
             dataScale: [1, 1, 1],
             singleSided: true,
+            text: this.text,
+            next_loc:this.next_loc,
+            next_rot:this.next_rot,
+        };
+
+        this.plackinfo = {
+            name: "plack",
+            type: "2d",
+            translation: Microverse.v3_add(this.destination, [-1, 0, 0]),
+            rotation: [0, 3.14/2, 0],
+            behaviorModules: ["Text","TourButton"],
+            shadow: true,
+            myScope: "left",
+            dataScale: [1, 1, 1],
+            singleSided: true,
+            textureType: "canvas",
+            textureWidth: 1024,
+            textureHeight: 768,
+            width: 1,
+            height: 0.75,
+            depth: 0.05,
+            color: 0xff0000,
+            cornerRadius: 0.1,
             text: this.text,
             next_loc:this.next_loc,
             next_rot:this.next_rot,
@@ -163,7 +200,7 @@ class TourActor{
     visible(){
         //console.log("hi");
         if(!this.textCard){
-            this.textCard = this.createCard(this.textinfo);
+            this.textCard = this.createCard(this.plackinfo);
             //this.buttonCard = this.createCard(this.buttoninfo);
         }
     }
@@ -217,7 +254,12 @@ export default {
     modules: [
         {
             name: "GlowText",
-            actorBehaviors: [TextActor],
+            actorBehaviors: [GlowTextActor],
+            pawnBehaviors: [GlowTextPawn]
+        },
+        {
+            name: "Text",
+            //actorBehaviors: [TextActor],
             pawnBehaviors: [TextPawn]
         },
         {
