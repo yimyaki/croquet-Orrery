@@ -22,8 +22,9 @@ export function init(Constants) {
     Constants.UserBehaviorDirectory = "behaviors/default";
     Constants.ExcludedSystemBehaviorModules = ["avatarEvents.js"];
     Constants.UserBehaviorModules = [
-        "csmLights.js","orb.js", "simpleSpin.js", "reflector.js","tour.js","avatarEvents.js"
+        "csmLights.js","orb.js", "simpleSpin.js", "reflector.js","tour.js","avatarEvents.js","bitcoinTracker.js",
     ];
+    const frameColor = 0x888888;
 
     Constants.DefaultCards = [
         {
@@ -195,6 +196,26 @@ export function init(Constants) {
                 next_rot:[0,0,0,1],
                 text: "station 3: These orrerys represent the object. each user has one copy on their system which is kept syncronixed through the reflector. click to go to next station",
             }
+        },
+        {
+            card: {
+                name: "bitcointracker",
+                translation: [-5, 0.6, -16.87],
+                rotation: [0, 0, 0],
+                scale: [3, 3, 3],
+                type: "2d",
+                textureType: "canvas",
+                textureWidth: 1024,
+                textureHeight: 768,
+                width: 1,
+                height: 0.75,
+                frameColor: frameColor,
+                // color: 0xffffff,
+                depth: 0.05,
+                cornerRadius: 0.1,
+                behaviorModules: ["Elected", "BitcoinTracker"],
+            },
+            id: "main",
         },
     ];
 }
