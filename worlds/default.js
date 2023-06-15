@@ -161,7 +161,7 @@ export function init(Constants) {
                 dataScale: [1, 1, 1],
                 destination: [10, 0, 0],
                 next_loc:[1,0,0],
-                next_rot:[0,0,0,1],
+                next_rot:[0,0.7071,0,0.7071],
                 text: "start tour: click to go to next station",
 
             }
@@ -177,8 +177,8 @@ export function init(Constants) {
                 dataScale: [1, 1, 1],
                 destination: [1, 0, 0],
                 next_loc:[-3,0,4],
-                next_rot:[0,0,0,1],
-                text: "station 2:This is the refector. the reflector send out ticks to keep the models syncronized. click to go to next station",
+                next_rot:[0,0.7071,0,0.7071],
+                text: 'station 2:This is the refector.\n the reflector send out ticks to keep the models syncronized.\n click to go to next station',
 
             }
         },
@@ -193,8 +193,8 @@ export function init(Constants) {
                 dataScale: [1, 1, 1],
                 destination: [-3, 0, 4],
                 next_loc:[10,0,0],
-                next_rot:[0,0,0,1],
-                text: "station 3: These orrerys represent the object. each user has one copy on their system which is kept syncronixed through the reflector. click to go to next station",
+                next_rot:[0,0.7071,0,0.7071],
+                text: 'station 3: These orrerys represent the object.\n Each user has one copy on their system which is kept syncronixed through the reflector.\n click to go to next station',
             }
         },
         {

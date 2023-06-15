@@ -78,7 +78,7 @@ class GlowTextPawn {
 
 class TextPawn {
     setup(){
-        this.text = this.actor._cardData.text||"load";
+        this.text = this.actor._cardData.text||'load';
         this.addText();
     }
 
@@ -87,11 +87,11 @@ class TextPawn {
 
         this.clear("#222222");
         let ctx = this.canvas.getContext("2d");
-        ctx.textAlign = "right";
+        ctx.textAlign = "center";
         ctx.fillStyle = color;
 
         ctx.font = "40px Arial";
-        ctx.fillText(this.text, this.canvas.width - 40, 85);
+        ctx.fillText(this.text, this.canvas.width/2, 85);
 
         this.texture.needsUpdate = true;
     }
