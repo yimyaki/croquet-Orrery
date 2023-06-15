@@ -81,24 +81,21 @@ class TextPawn {
         this.text = this.actor._cardData.text||"load";
         this.addText();
     }
-    addText(){
-        let ctx = this.canvas.getContext("2d");
-        this.clear("#222222");
-        ctx.textAlign = "center";
-        ctx.font = "40px Arial";
-        ctx.fillText("this.text", this.canvas.width / 2, 100);
-        ctx.fillStyle = "#FF2222";
 
-        let color = "#FF2222";
-        //let material = this.makePlaneMaterial(this.actor._cardData.depth, color, this.actor._cardData.frameColor, false);
-        //let obj = this.shape.children.find((o) => o.name === "2d");
-        //if (!obj || !obj.children || obj.children.length === 0) {
-        //    console.log("no kids");
-        //    return;}
-        //obj = obj.children[0];
-       // ctx.material = material;
-       this.texture.needsUpdate = true;
+    addText() {
+        let color = "#22FF22";
+
+        this.clear("#222222");
+        let ctx = this.canvas.getContext("2d");
+        ctx.textAlign = "right";
+        ctx.fillStyle = color;
+
+        ctx.font = "40px Arial";
+        ctx.fillText(this.text, this.canvas.width - 40, 85);
+
+        this.texture.needsUpdate = true;
     }
+
     clear(fill) {
         let ctx = this.canvas.getContext("2d");
         ctx.fillStyle = fill;

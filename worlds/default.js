@@ -215,7 +215,7 @@ export function init(Constants) {
                 cornerRadius: 0.1,
                 behaviorModules: ["Elected", "BitcoinTracker"],
             },
-            id: "main",
+            //id: "main",
         },
     ];
 }
