@@ -91,10 +91,31 @@ class TextPawn {
         ctx.fillStyle = color;
 
         ctx.font = "40px Arial";
-        ctx.fillText(this.text, this.canvas.width/2, 85);
-
+        //ctx.fillText(this.text, this.canvas.width/2, 85);
+        this.wrapText(ctx, this.text, this.canvas.width/2,85,this.canvas.width -20,50);
         this.texture.needsUpdate = true;
     }
+
+    wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+        let words = text.split(' ');
+        let line = '';
+
+        let n = 0
+        for(n = 0; n < words.length; n++) {
+          let testLine = line + words[n] + ' ';
+          let metrics = ctx.measureText(testLine);
+          let testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            ctx.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        }
+        ctx.fillText(line, x, y);
+      }
 
     clear(fill) {
         let ctx = this.canvas.getContext("2d");
@@ -128,6 +149,8 @@ class TourActor{
         this.next_loc = this._cardData.next_loc;
         this.next_rot = this._cardData.next_rot;
         this.destination = this._cardData.destination;
+        this.plack_rot = this._cardData.plack_rot;
+        this.angle = Math.asin(this.plack_rot[1])*2;
         this.text = this._cardData.text;
         if(!this.stepping){
             this.step();
@@ -151,8 +174,8 @@ class TourActor{
         this.plackinfo = {
             name: "plack",
             type: "2d",
-            translation: Microverse.v3_add(this.destination, [-1, 0, 0]),
-            rotation: [0, 3.14/2, 0],
+            translation: Microverse.v3_add(this.destination, [-Math.sin(this.angle), -0.4, -Math.cos(this.angle)]),
+            rotation: [0, this.angle, 0],//Microverse.v3_add(this.destination, [-1, -0.4, 0]),
             behaviorModules: ["Text","TourButton"],
             shadow: true,
             myScope: "left",
@@ -160,7 +183,7 @@ class TourActor{
             singleSided: true,
             textureType: "canvas",
             textureWidth: 1024,
-            textureHeight: 768,
+            textureHeight: 384,
             width: 1,
             height: 0.75,
             depth: 0.05,

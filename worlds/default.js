@@ -160,7 +160,8 @@ export function init(Constants) {
                 shadow: true,
                 dataScale: [1, 1, 1],
                 destination: [10, 0, 0],
-                next_loc:[1,0,0],
+                next_loc:[3,0,0],
+                plack_rot:[0,0.7071,0,0.7071],
                 next_rot:[0,0.7071,0,0.7071],
                 text: "start tour: click to go to next station",
 
@@ -170,14 +171,15 @@ export function init(Constants) {
             card: {
                 name: "tour",
                 type: "object",
-                translation: [1, 0, 0],
+                translation: [3, 0, 0],
                 rotation: [0, 0, 0],
                 behaviorModules: ["Tour"],
                 shadow: true,
                 dataScale: [1, 1, 1],
-                destination: [1, 0, 0],
+                destination: [3, 0, 0],
                 next_loc:[-3,0,4],
-                next_rot:[0,0.7071,0,0.7071],
+                plack_rot:[0,0.7071,0,0.7071],
+                next_rot:[0,-0.7071,0,0.7071],
                 text: 'station 2:This is the refector.\n the reflector send out ticks to keep the models syncronized.\n click to go to next station',
 
             }
@@ -192,12 +194,29 @@ export function init(Constants) {
                 shadow: true,
                 dataScale: [1, 1, 1],
                 destination: [-3, 0, 4],
-                next_loc:[10,0,0],
-                next_rot:[0,0.7071,0,0.7071],
-                text: 'station 3: These orrerys represent the object.\n Each user has one copy on their system which is kept syncronixed through the reflector.\n click to go to next station',
+                next_loc:[1.5,0,10],
+                plack_rot:[0,-0.7071,0,0.7071],
+                next_rot:[0, 0.14357139067798902, 0, 0.9896399627029966],
+                text: 'station 3: These orrerys represent the object.\n Each user has one copy on their system which is kept syncronixed through the reflector. This is shown as white ticks which are sent to the orrery every second\n click to go to next station',
             }
         },
         {
+            card: {
+                name: "tour",
+                type: "object",
+                translation: [1.5, 0, 10],
+                rotation: [0, 0, 0],
+                behaviorModules: ["Tour"],
+                shadow: true,
+                dataScale: [1, 1, 1],
+                destination: [1.5, 0, 10],
+                next_loc:[10,0,0],
+                plack_rot:[0, 0.14357139067798902, 0, 0.9896399627029966],
+                next_rot:[0,0.7071,0,0.7071],
+                text: 'station 4: when a change is made on one orrery, a message is sent to the refelctor. the refector send back a message to all orreries and the change is made by all of them simutationslu whn th message arrives. click on the orrery to make a change. click on this plack to go to the next station',
+            }
+        },
+       /* {
             card: {
                 name: "bitcointracker",
                 translation: [-5, 0.6, -16.87],
@@ -216,6 +235,6 @@ export function init(Constants) {
                 behaviorModules: ["Elected", "BitcoinTracker"],
             },
             //id: "main",
-        },
+        },*/
     ];
 }
