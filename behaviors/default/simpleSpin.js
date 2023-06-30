@@ -10,6 +10,8 @@ class SpinningActor {
         this.angle = 0; // the initial angle
         this.spinSpeed = 0.01; // how fast will we spin (in radians)
         this.addEventListener("pointerDown", "reflectToggle");
+        //this.addEventListener("pointerDown", "createOutMessage");//reflectSpawn");
+        //this.addEventListener("pointerDown", "waitReflect");//reflectSpawn");
         this.subscribe("return", "toggle", "toggle");
         this.radius = this._cardData.radius;
     }
