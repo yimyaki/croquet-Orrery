@@ -9,11 +9,52 @@ class SpinningActor {
         this.spinning = false; // start without spinning
         this.angle = 0; // the initial angle
         this.spinSpeed = 0.01; // how fast will we spin (in radians)
-        this.addEventListener("pointerDown", "reflectToggle");
-        //this.addEventListener("pointerDown", "createOutMessage");//reflectSpawn");
-        //this.addEventListener("pointerDown", "waitReflect");//reflectSpawn");
+        //this.addEventListener("pointerDown", "reflectToggle");
+        this.addEventListener("pointerDown", "createOutMessage");//reflectSpawn");
+        this.addEventListener("pointerDown", "waitReflect");//reflectSpawn");
         this.subscribe("return", "toggle", "toggle");
+        this.subscribe("message", "reflect_spin","createInMessage");
+        this.subscribe("message", "done_spin", "deleteMessage");
         this.radius = this._cardData.radius;
+        this.messages = [];
+    }
+
+    createOutMessage(){
+        let translation = Microverse.v3_add(this.translation, [0, 0, 0]);
+        console.log("creating message channel");
+        //this.messages.forEach((c) => c.destroy());
+        let message = this.createCard({
+            name: "blip",
+                type: "object",
+                translation,
+                rotation: [0, 0, 0],
+                behaviorModules: ["MessageBlip"],
+                shadow: true,
+                dataScale: [1, 1, 1],
+                destination: this._cardData.spawnTranslation,
+                messageType: "out",
+                messageFor: "spin",
+        });
+        this.messages.push(message);
+    }
+
+    createInMessage(){
+        let translation = Microverse.v3_add(this.translation, [0, 0, 0]);
+        console.log("creating message channel");
+        //this.messages.forEach((c) => c.destroy());
+        let message = this.createCard({
+            name: "blip",
+                type: "object",
+                translation,
+                rotation: [0, 0, 0],
+                behaviorModules: ["MessageBlip"],
+                shadow: true,
+                dataScale: [1, 1, 1],
+                destination: this._cardData.spawnTranslation,
+                messageType: "in",
+                messageFor: "spin",
+        });
+        this.messages.push(message);
     }
 
     step() {
@@ -25,6 +66,14 @@ class SpinningActor {
 
     reflectToggle(){
         this.publish("reflect", "toggle", this.radius);
+    }
+
+    waitReflect(){
+        this.future(20000).reflectToggle();
+    }
+
+    deleteMessage(){
+        this.messages.forEach((c) => c.deleting = true);
     }
 
     toggle(rad) {

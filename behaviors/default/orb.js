@@ -229,8 +229,8 @@ class SpawnActor{
         this.addEventListener("pointerDown", "createOutMessage");//reflectSpawn");
         this.addEventListener("pointerDown", "waitReflect");//reflectSpawn");
         this.subscribe("return", "spawn", "spawn");
-        this.subscribe("message", "reflect","createInMessage");
-        this.subscribe("message", "done", "deleteMessage");
+        this.subscribe("message", "reflect_spawn","createInMessage");
+        this.subscribe("message", "done_spawn", "deleteMessage");
         this.spawn(); // spawn one on startup
         this.radd = 0.1;
         this.messages = [];
@@ -250,6 +250,7 @@ class SpawnActor{
                 dataScale: [1, 1, 1],
                 destination: this._cardData.spawnTranslation,
                 messageType: "out",
+                messageFor: "spawn",
         });
         this.messages.push(message);
     }
@@ -257,7 +258,7 @@ class SpawnActor{
     createInMessage(){
         let translation = Microverse.v3_add(this.translation, [0, 0, 0]);
         console.log("creating message channel");
-        this.messages.forEach((c) => c.destroy());
+        //this.messages.forEach((c) => c.destroy());
         let message = this.createCard({
             name: "blip",
                 type: "object",
@@ -268,6 +269,7 @@ class SpawnActor{
                 dataScale: [1, 1, 1],
                 destination: this._cardData.spawnTranslation,
                 messageType: "in",
+                messageFor: "spawn",
         });
         this.messages.push(message);
     }
@@ -348,6 +350,7 @@ class MessageBlipActor {
         this.ratio = 0;
         this.isNeg = 1;
         this.pointB = [0,0,0];
+        this.deleting = false;
         this.pointA = this._cardData.destination || [0,0,4]; // postion of 'removed' gate.
         if(this._cardData.messageType == "in"){
             this.pointA = [0,0,0];
@@ -361,27 +364,40 @@ class MessageBlipActor {
 
     step() {
         this.updatePositionBy(0.01);
-        if(this.deleting){
-            return;
+        if(!this.deleting){
+            this.future(100).step();
         }
-        this.future(100).step();
     }
 
     updatePositionBy(ratio) { // Where The Movement Occurs
+        if(!this.deleting){
         this.ratio += ratio*this.isNeg;
         this.ratio = Math.min(1, Math.max(0, this.ratio));
         let pos = Microverse.v3_lerp(this.pointA, this.pointB, this.ratio);
-        //console.log(this.doomed);
         this.set({translation: pos});
         if(this.ratio >= 1){
             if(this._cardData.messageType == "out"){
-                this.publish("message", "reflect");}
+                if(this._cardData.messageFor == "spawn"){
+                    this.publish("message", "reflect_spawn");
+                }
+                if(this._cardData.messageFor == "spin"){
+                    this.publish("message", "reflect_spin");
+                }
+            }
             if(this._cardData.messageType == "in"){
                 //this.publish("message", "done");
-                this.deleting = true;
+                console.log(this.deleting);
+                if(this._cardData.messageFor == "spawn"){
+                    this.publish("message", "done_spawn");
+                }
+                if(this._cardData.messageFor == "spin"){
+                    this.publish("message", "done_spin");
+                }
                 this.destroy();
             }
+            this.deleting = true;
         }
+    }
         if(this.ratio < 0){
             
             //this.ratio = 0;
