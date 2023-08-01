@@ -144,14 +144,23 @@ class QRCodePawn {
 class OrbActor {
     setup(){
         this.messages = [];
-        this.createMessage();
-        
+        this.flowticks();
+
     }
 
-    createMessage(){
+    flowticks(){
+        this.messages.forEach((c) => c.destroy());
+        this.createMessage(0);
+        this.createMessage(0.2);
+        this.createMessage(0.4);
+        this.createMessage(0.6);
+        this.createMessage(0.8);
+    }
+
+    createMessage(start_ratio){
         let translation = Microverse.v3_add(this.translation, [0, 0, 0]);
         console.log("creating message channel");
-        this.messages.forEach((c) => c.destroy());
+        //this.messages.forEach((c) => c.destroy());
         let message = this.createCard({
             name: "blip",
                 type: "object",
@@ -161,6 +170,7 @@ class OrbActor {
                 shadow: true,
                 dataScale: [1, 1, 1],
                 destination: this._cardData.spawnTranslation,
+                start_ratio: start_ratio,
         });
         this.messages.push(message);
 
@@ -275,7 +285,9 @@ class SpawnActor{
     }
 
     deleteMessage(){
-        this.messages.forEach((c) => c.deleting = true);
+        /* TODO: FIX THIS!! */
+        //this.messages.forEach((c) => c.deleting = true);
+        //this.messages.forEach((c) => c.destroy());
     }
 
     waitReflect(){
@@ -425,7 +437,7 @@ class MessageBlipPawn {
 
 class TickBlipActor {
     setup(){
-        this.ratio = 0;
+        this.ratio = this._cardData.start_ratio||0;
         this.pointA = [0,0,0];
         this.pointB = this._cardData.destination || [0,0,4]; // postion of 'removed' gate.
         if (this.ratio === undefined) this.ratio = 0.2;
@@ -440,13 +452,20 @@ class TickBlipActor {
     }
 
     updatePositionBy(ratio) { // Where The Movement Occurs
-        this.ratio += ratio;
+        
         this.ratio = Math.min(1, Math.max(0, this.ratio));
         let pos = Microverse.v3_lerp(this.pointA, this.pointB, this.ratio);
-        this.set({translation: pos});
+        if(this.ratio==0){
+            this.set({translation: pos});
+        }
+        else{
+            this.translateTo(pos);
+        }
+        this.ratio += ratio;
         if(this.ratio >= 1){
             this.ratio = 0;
         }
+
     }
 
 }
@@ -507,6 +526,39 @@ class SpawnOrreryPawn{
         this.addEventListener("pointerDoubleDown", "nop");
     }
 }
+
+class StarActor{
+    setup(){
+
+    }
+
+    createStar(){
+
+    }
+
+    flashStar(){
+
+    }
+
+}
+
+class StarPawn{
+    setup(){
+
+    }
+
+    createStar(){
+        this.geometry = new Microverse.THREE.TetrahedronGeometry(1,0);
+        this.material = new Microverse.THREE.MeshStandardMaterial();
+    }
+
+    flashStar(){
+       // this.material.colot.set??;
+        
+    }
+
+}
+
 export default {
     modules: [
         {
@@ -537,6 +589,12 @@ export default {
             name: "TickBlip",
             actorBehaviors: [TickBlipActor],
             pawnBehaviors: [TickBlipPawn]
+        },
+        {
+            name: "Star",
+            actorBehaviors: [StarActor],
+            pawnBehaviors: [StarPawn]
+
         },
         
     ]
