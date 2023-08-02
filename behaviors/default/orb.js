@@ -401,9 +401,11 @@ class MessageBlipActor {
                 console.log(this.deleting);
                 if(this._cardData.messageFor == "spawn"){
                     this.publish("message", "done_spawn");
+                    this.publish("message", "arrive", 0x00FF00);
                 }
                 if(this._cardData.messageFor == "spin"){
                     this.publish("message", "done_spin");
+                    this.publish("message", "arrive", 0x00FF00);
                 }
                 this.destroy();
             }
@@ -464,6 +466,7 @@ class TickBlipActor {
         this.ratio += ratio;
         if(this.ratio >= 1){
             this.ratio = 0;
+            this.publish("message", "arrive", 0xFFFFFF);
         }
 
     }
@@ -544,16 +547,26 @@ class StarActor{
 
 class StarPawn{
     setup(){
-
+        this.createStar;
+        this.subscribe("message", "arrive", "flashStar");
     }
 
     createStar(){
         this.geometry = new Microverse.THREE.TetrahedronGeometry(1,0);
-        this.material = new Microverse.THREE.MeshStandardMaterial();
+        this.material = new Microverse.THREE.MeshStandardMaterial({
+            //color: this.actor._cardData.color || 0xFFFFFF, 
+            emissive: 0x888888,
+        });
+        let star = new Microverse.THREE.Mesh(this.geometry, this.material);
+        star.position.set(0,0,0);
+        star.castShadow = false;
+        star.receiveShadow = false;
+        this.shape.add(star);
     }
 
-    flashStar(){
-       // this.material.colot.set??;
+    flashStar(color){
+       // this.material.color.set(??);
+       this.material.emissive.set(color);
         
     }
 
