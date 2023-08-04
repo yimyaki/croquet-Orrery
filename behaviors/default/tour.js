@@ -229,7 +229,8 @@ class TourActor{
         });
 
         if(this.visible && !attendee){
-            this.say("invisible");
+            //this.say("invisible");
+            this.invisible();
         }
         this.future(100).step();
 
@@ -237,10 +238,19 @@ class TourActor{
 
     visible(){
         //console.log("hi");
-        if(!this.textCard){
+        if(!this.textCard || !this.vis){
             this.textCard = this.createCard(this.plackinfo);
+            this.vis = true
             //this.buttonCard = this.createCard(this.buttoninfo);
         }
+    }
+
+    invisible(){
+        if(this.textCard){
+            this.textCard.destroy();
+            this.vis = false;
+        }
+        //this.buttonCard.destroy();
     }
     
 }

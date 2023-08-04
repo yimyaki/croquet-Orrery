@@ -566,7 +566,7 @@ class StarPawn{
     }
 
     createStar(){
-        this.geometry = new Microverse.THREE.TetrahedronGeometry(1,0);
+        this.geometry = new Microverse.THREE.TetrahedronGeometry(0.3,0);
         this.material = new Microverse.THREE.MeshStandardMaterial({
             //color: this.actor._cardData.color || 0xFFFFFF, 
             emissive: 0x000000,

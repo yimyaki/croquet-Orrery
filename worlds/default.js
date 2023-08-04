@@ -216,7 +216,7 @@ export function init(Constants) {
                 text: 'station 4: when a change is made on one orrery, a message is sent to the reflector. the reflector send back a message to all orreries, and the change is made by all of them simultaniously when the messege arrives. click on the orrery to make a change. Click on this plaque to go to the next station',
             }
         },
-        {
+       /* {
             card: {
                 name: "star",
                 type: "object",
@@ -231,7 +231,7 @@ export function init(Constants) {
                 //next_rot:[0,0.7071,0,0.7071],
                 //text: 'station 4: when a change is made on one orrery, a message is sent to the reflector. the reflector send back a message to all orreries, and the change is made by all of them simultaniously when the messege arrives. click on the orrery to make a change. Click on this plaque to go to the next station',
             }
-        },
+        },*/
        /* {
             card: {
                 name: "bitcointracker",
