@@ -155,6 +155,7 @@ class OrbActor {
         this.createMessage(0.4);
         this.createMessage(0.6);
         this.createMessage(0.8);
+        this.createMessageReceiver()
     }
 
     createMessage(start_ratio){
@@ -175,6 +176,19 @@ class OrbActor {
         this.messages.push(message);
 
         
+    }
+
+    createMessageReceiver(){
+        let translation = Microverse.v3_add(this.translation, [0, 1, 0]);
+        let message = this.createCard({
+            name: "star",
+                type: "object",
+                translation,
+                rotation: [0, 0, 0],
+                behaviorModules: ["Star"],
+                dataScale: [1, 1, 1],
+        });
+        this.messages.push(message);
     }
 }
 class OrbPawn {
@@ -547,7 +561,7 @@ class StarActor{
 
 class StarPawn{
     setup(){
-        this.createStar;
+        this.createStar();
         this.subscribe("message", "arrive", "flashStar");
     }
 
@@ -555,7 +569,8 @@ class StarPawn{
         this.geometry = new Microverse.THREE.TetrahedronGeometry(1,0);
         this.material = new Microverse.THREE.MeshStandardMaterial({
             //color: this.actor._cardData.color || 0xFFFFFF, 
-            emissive: 0x888888,
+            emissive: 0x000000,
+            color: 0x444444,
         });
         let star = new Microverse.THREE.Mesh(this.geometry, this.material);
         star.position.set(0,0,0);
@@ -565,9 +580,14 @@ class StarPawn{
     }
 
     flashStar(color){
-       // this.material.color.set(??);
-       this.material.emissive.set(color);
-        
+        this.material.color.set(color);
+        this.material.emissive.set(color);
+        this.future(100).dimStar();
+    }
+
+    dimStar(){
+        this.material.color.set(0x444444);
+        this.material.emissive.set(0x000000);
     }
 
 }
