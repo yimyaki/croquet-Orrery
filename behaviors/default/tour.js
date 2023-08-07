@@ -2,12 +2,11 @@
     This file contains 3 behaviors:
         -glowtext
         -qrcode
-        -snowball
+        -tour
 
     Glowtext and qrcode are unused in this world, and can be implemented to add an in world qrcode
     linking to the scene.
 
-    Snowball contains the code to produce a snowball that is draggable in 2 dimentions.
 */
 class GlowTextActor {
     setup() {
@@ -188,27 +187,21 @@ class TourActor{
             height: 0.75,
             depth: 0.05,
             fullBright: false,
-            color: 0xffff00,
+            //color: 0xffff00,
+            color: 0x994d00, //0xb67e11, //0xd4af37,
+            metalness:1.0,
+            roughness: 0.2,
             frameColor: 0xff0000,
             cornerRadius: 0.1,
             text: this.text,
             next_loc:this.next_loc,
             next_rot:this.next_rot,
         };
-
-        this.buttoninfo = {
-            name: "button",
-            type: "object",
-            translation: [10, 0, 2],
-            rotation: [0, 0, 0],
-            behaviorModules: ["TourButton"],
-            shadow: true,
-            myScope: "left",
-            level: 1,
-            dataScale: [1, 1, 1],
-            next_loc:this.next_loc,
-            singleSided: true,
-        };
+        /**var canvas = document.createElement("canvas");
+var canvasMap = new THREE.Texture(canvas)
+var mat = new THREE.MeshPhongMaterial();
+mat.map = canvasMap;
+var mesh = new THREE.Mesh(geom,mat); */
     }
 
     step(){

@@ -513,6 +513,23 @@ class SpawnOrreryActor{
         //this.spawn(); // spawn one on startup
         this.radd = 0.1;
         this.messages = [];
+        //this.subscribe(return, spawn, );
+        //this.subscribe(return, toggle, );
+    }
+
+    markRing(){
+        this.rings.add(this.radd);
+        this.radd += 0.05;
+
+    }
+
+    markOrbit(rad){
+        this.ringrot[rad] = true;
+
+    }
+
+    orbit(){
+        //this.ringrot.forEach((c) => c  = c+0.1)
     }
 
     spawn(){
