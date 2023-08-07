@@ -515,10 +515,12 @@ class SpawnOrreryActor{
         this.messages = [];
         //this.subscribe(return, spawn, );
         //this.subscribe(return, toggle, );
+        this.rings ={};
+        this.ringrot = {};
     }
 
     markRing(){
-        this.rings.add(this.radd);
+        this.rings[this.radd] = 0;
         this.radd += 0.05;
 
     }
@@ -529,7 +531,11 @@ class SpawnOrreryActor{
     }
 
     orbit(){
-        //this.ringrot.forEach((c) => c  = c+0.1)
+        //this.rings.forEach((c) => {if(ringrot[c]){ this.rings[c] =+ 0.1}});
+        Object.keys(this.rings).forEach(function(c) {
+            if(ringrot[c]){ this.rings[c] =+ 0.1};
+        });
+    
     }
 
     spawn(){
