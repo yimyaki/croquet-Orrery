@@ -548,14 +548,20 @@ class SpawnOrreryActor{
         this.publish("spawn", "spawn", {
             name: "spawned_orb",
             type: "object",
-            dataRotation: [0,0,0],
-            translation,//: this._cardData.dataTranslation,
-            rotation: [0,0,0],
-            behaviorModules: [Orb],//this._cardData.spawnBehaviors,
-            layers: ["pointer"],
+            translation,
+            rotation: [0, 0, 0],
+            behaviorModules: ["Orb","Spawn"],
             shadow: true,
-            //radius: this.radd+this._cardData.radius,
-            //thickness: this._cardData.spawnThickness,
+            radius: .5,
+            dataScale: [1, 1, 1],
+
+            spawnType: "object",
+            spawnDataRotation:  [0, 0, 0],
+            spawnTranslation: [0, 0, 9],
+            spawnRotation:  [0, 0, 0],
+            spawnScale: [1, 1, 1],
+            spawnThickness: .02,
+            spawnBehaviors: ["Ring", "SimpleSpin"],
         });
         Object.keys(this.rings).forEach(function(c) {
             this.publish("spawn", "spawn", {
