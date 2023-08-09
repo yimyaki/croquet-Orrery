@@ -31,7 +31,7 @@ class SpinningActor {
                 behaviorModules: ["MessageBlip"],
                 shadow: true,
                 dataScale: [1, 1, 1],
-                destination: this._cardData.spawnTranslation,
+                destination: this._cardData.destination,
                 messageType: "out",
                 messageFor: "spin",
         });
@@ -50,7 +50,7 @@ class SpinningActor {
                 behaviorModules: ["MessageBlip"],
                 shadow: true,
                 dataScale: [1, 1, 1],
-                destination: this._cardData.spawnTranslation,
+                destination: this._cardData.destination,
                 messageType: "in",
                 messageFor: "spin",
         });

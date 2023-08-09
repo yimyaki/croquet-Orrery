@@ -330,6 +330,7 @@ class SpawnActor{
             shadow: true,
             radius: this.radd+this._cardData.radius,
             thickness: this._cardData.spawnThickness,
+            destination:this._cardData.spawnTranslation,
         });
     }
 }
@@ -557,7 +558,7 @@ class SpawnOrreryActor{
 
             spawnType: "object",
             spawnDataRotation:  [0, 0, 0],
-            spawnTranslation: [0, 0, 9],
+            spawnTranslation: this.translation,
             spawnRotation:  [0, 0, 0],
             spawnScale: [1, 1, 1],
             spawnThickness: .02,
@@ -570,7 +571,7 @@ class SpawnOrreryActor{
                 dataRotation: [0,0,0],
                 translation,//: this._cardData.dataTranslation,
                 rotation: this.rings[c],
-                behaviorModules: [Orb],//this._cardData.spawnBehaviors,
+                behaviorModules: ["Ring"],//this._cardData.spawnBehaviors,
                 layers: ["pointer"],
                 shadow: true,
                 //radius: this.radd+this._cardData.radius,
