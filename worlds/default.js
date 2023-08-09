@@ -108,20 +108,6 @@ export function init(Constants) {
 
             }
         },
-        /**{
-            card: {
-                name: "ring",
-                type: "object",
-                translation: [0, 0, 9],
-                rotation: [0, 0, 0],
-                behaviorModules: ["Ring", "SimpleSpin"],
-                shadow: true,
-                radius: .8,
-                thickness: .02,
-                dataScale: [1, 1, 1],
-
-            }
-        },**/
         {
             card: {
                 name:"Crystal",
@@ -216,41 +202,15 @@ export function init(Constants) {
                 text: 'station 4: when a change is made on one orrery, a message is sent to the reflector. the reflector send back a message to all orreries, and the change is made by all of them simultaniously when the messege arrives. click on the orrery to make a change. Click on this plaque to go to the next station',
             }
         },
-       /* {
+       {
             card: {
                 name: "star",
                 type: "object",
                 translation: [1.5, 0, 10],
                 rotation: [0, 0, 0],
-                behaviorModules: ["Star"],
-                //shadow: true,
+                behaviorModules: ["Star", "SpawnOrrery"],
                 dataScale: [1, 1, 1],
-                //destination: [1.5, 0, 10],
-                //next_loc:[10,0,0],
-                //plack_rot:[0, 0.14357139067798902, 0, 0.9896399627029966],
-                //next_rot:[0,0.7071,0,0.7071],
-                //text: 'station 4: when a change is made on one orrery, a message is sent to the reflector. the reflector send back a message to all orreries, and the change is made by all of them simultaniously when the messege arrives. click on the orrery to make a change. Click on this plaque to go to the next station',
             }
-        },*/
-       /* {
-            card: {
-                name: "bitcointracker",
-                translation: [-5, 0.6, -16.87],
-                rotation: [0, 0, 0],
-                scale: [3, 3, 3],
-                type: "2d",
-                textureType: "canvas",
-                textureWidth: 1024,
-                textureHeight: 768,
-                width: 1,
-                height: 0.75,
-                frameColor: frameColor,
-                // color: 0xffffff,
-                depth: 0.05,
-                cornerRadius: 0.1,
-                behaviorModules: ["Elected", "BitcoinTracker"],
-            },
-            //id: "main",
-        },*/
+        },
     ];
 }

@@ -533,7 +533,7 @@ class SpawnOrreryActor{
     orbit(){
         //this.rings.forEach((c) => {if(ringrot[c]){ this.rings[c] =+ 0.1}});
         Object.keys(this.rings).forEach(function(c) {
-            if(ringrot[c]){ this.rings[c] =+ 0.1};
+            if(this.ringrot[c]){ this.rings[c] =+ 0.1};
         });
     
     }
@@ -546,17 +546,30 @@ class SpawnOrreryActor{
 
         //create spawn
         this.publish("spawn", "spawn", {
-            name: "spawned_object",
-            type: this._cardData.spawnType,
-            dataRotation: this._cardData.spawnDataRotation,
+            name: "spawned_orb",
+            type: "object",
+            dataRotation: [0,0,0],
             translation,//: this._cardData.dataTranslation,
-            rotation: this._cardData.spawnRotation,
-            dataScale: this._cardData.spawnScale,
-            behaviorModules: this._cardData.spawnBehaviors,
+            rotation: [0,0,0],
+            behaviorModules: [Orb],//this._cardData.spawnBehaviors,
             layers: ["pointer"],
             shadow: true,
-            radius: this.radd+this._cardData.radius,
-            thickness: this._cardData.spawnThickness,
+            //radius: this.radd+this._cardData.radius,
+            //thickness: this._cardData.spawnThickness,
+        });
+        Object.keys(this.rings).forEach(function(c) {
+            this.publish("spawn", "spawn", {
+                name: "spawned_orb",
+                type: "object",
+                dataRotation: [0,0,0],
+                translation,//: this._cardData.dataTranslation,
+                rotation: this.rings[c],
+                behaviorModules: [Orb],//this._cardData.spawnBehaviors,
+                layers: ["pointer"],
+                shadow: true,
+                //radius: this.radd+this._cardData.radius,
+                //thickness: this._cardData.spawnThickness,
+            });
         });
     }
 }
@@ -650,6 +663,12 @@ export default {
             name: "Star",
             actorBehaviors: [StarActor],
             pawnBehaviors: [StarPawn]
+
+        },
+        {
+            name: "SpawnOrrery",
+            actorBehaviors: [SpawnOrreryActor],
+            pawnBehaviors: [SpawnOrreryPawn]
 
         },
         
