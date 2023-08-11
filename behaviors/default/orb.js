@@ -279,6 +279,10 @@ class SpawnActor{
         this.messages.push(message);
     }
 
+    setRad(rad){
+        this.radd = this._cardData.newRadd;
+    }
+
     createInMessage(){
         let translation = Microverse.v3_add(this.translation, [0, 0, 0]);
         console.log("creating message channel");
@@ -555,6 +559,7 @@ class SpawnOrreryActor{
             shadow: true,
             radius: .5,
             dataScale: [1, 1, 1],
+            newRadd: this.radd,
 
             spawnType: "object",
             spawnDataRotation:  [0, 0, 0],
@@ -570,11 +575,11 @@ class SpawnOrreryActor{
                 type: "object",
                 dataRotation: [0,0,0],
                 translation,//: this._cardData.dataTranslation,
-                rotation: this.rings[c],
-                behaviorModules: ["Ring"],//this._cardData.spawnBehaviors,
+                //rotation: this.rings[c],
+                behaviorModules: ["Ring", "SimpleSpin"],//this._cardData.spawnBehaviors,
                 layers: ["pointer"],
                 shadow: true,
-                //radius: this.radd+this._cardData.radius,
+                radius: this.radd+.5,
                 //thickness: this._cardData.spawnThickness,
             });
         });
