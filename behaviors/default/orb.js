@@ -255,9 +255,17 @@ class SpawnActor{
         this.subscribe("return", "spawn", "spawn");
         this.subscribe("message", "reflect_spawn","createInMessage");
         this.subscribe("message", "done_spawn", "deleteMessage");
-        this.spawn(); // spawn one on startup
         this.radd = 0.1;
+        this.spawnStart(); // spawn one on startup
         this.messages = [];
+    }
+
+    spawnStart(){
+        let spawns = this._cardData.spawns || [];
+        if(this._cardData.spawns){
+            console.log(spawns);
+            spawns.forEach((c)=> this.spawn());
+        }
     }
 
     createOutMessage(){
@@ -518,15 +526,17 @@ class SpawnOrreryActor{
         //this.spawn(); // spawn one on startup
         this.radd = 0.1;
         this.messages = [];
-        //this.subscribe(return, spawn, );
+        this.subscribe("return", "spawn", "markRing");
         //this.subscribe(return, toggle, );
         this.rings ={};
         this.ringrot = {};
+        this.spawns = []
     }
 
     markRing(){
         this.rings[this.radd] = 0;
         this.radd += 0.05;
+        this.spawns.push(this.radd);
 
     }
 
@@ -560,6 +570,7 @@ class SpawnOrreryActor{
             radius: .5,
             dataScale: [1, 1, 1],
             newRadd: this.radd,
+            spawns:this.spawns,
 
             spawnType: "object",
             spawnDataRotation:  [0, 0, 0],
@@ -569,6 +580,7 @@ class SpawnOrreryActor{
             spawnThickness: .02,
             spawnBehaviors: ["Ring", "SimpleSpin"],
         });
+        /*
         Object.keys(this.rings).forEach(function(c) {
             this.publish("spawn", "spawn", {
                 name: "spawned_orb",
@@ -582,7 +594,7 @@ class SpawnOrreryActor{
                 radius: this.radd+.5,
                 //thickness: this._cardData.spawnThickness,
             });
-        });
+        });*/
     }
 }
 class SpawnOrreryPawn{
