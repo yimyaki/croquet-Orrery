@@ -557,7 +557,10 @@ class SpawnOrreryActor{
         ///Spawn an item using parameters from the spawner
         //add slight variation in spawn location to prevent overlap of multiple spawned objects
         this.radd+=0.05;
-        let translation = Microverse.v3_add(this.translation, [0, 0, 0]);
+        let x = Math.random() * 20 - 10;
+        let y = Math.random() * 2 + 1;
+        let z = Math.random() * 20 - 10;
+        let translation = Microverse.v3_add([x,0,z], [0, 0, 0]);
 
         //create spawn
         this.publish("spawn", "spawn", {
@@ -574,7 +577,7 @@ class SpawnOrreryActor{
 
             spawnType: "object",
             spawnDataRotation:  [0, 0, 0],
-            spawnTranslation: this.translation,
+            spawnTranslation: [x,0,z],
             spawnRotation:  [0, 0, 0],
             spawnScale: [1, 1, 1],
             spawnThickness: .02,
