@@ -196,10 +196,26 @@ export function init(Constants) {
                 shadow: true,
                 dataScale: [1, 1, 1],
                 destination: [1.5, 0, 10],
+                next_loc:[1.5, 0, 7],
+                plack_rot:[0, 0.14357139067798902, 0, 0.9896399627029966],
+                next_rot:[0, 0.14357139067798902, 0, 0.9896399627029966],
+                text: 'station 4: when a change is made on one orrery, a message is sent to the reflector. the reflector send back a message to all orreries, and the change is made by all of them simultaniously when the messege arrives. click on the orrery to make a change. Click on this plaque to go to the next station',
+            }
+        },
+        {
+            card: {
+                name: "tour",
+                type: "object",
+                translation: [1.5, 0, 10],
+                rotation: [0, 0, 0],
+                behaviorModules: ["Tour"],
+                shadow: true,
+                dataScale: [1, 1, 1],
+                destination: [1.5, 0, 7],
                 next_loc:[10,0,0],
                 plack_rot:[0, 0.14357139067798902, 0, 0.9896399627029966],
                 next_rot:[0,0.7071,0,0.7071],
-                text: 'station 4: when a change is made on one orrery, a message is sent to the reflector. the reflector send back a message to all orreries, and the change is made by all of them simultaniously when the messege arrives. click on the orrery to make a change. Click on this plaque to go to the next station',
+                text: 'station 5: these changes are saved so that new orreries appear in the same state. click on this bell to spawn a new orrery. click on this plack to return to beggining',
             }
         },
        {
