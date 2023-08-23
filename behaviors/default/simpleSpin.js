@@ -69,7 +69,7 @@ class SpinningActor {
     }
 
     waitReflect(){
-        this.future(20000).reflectToggle();
+        this.future(10000).reflectToggle();
     }
 
     deleteMessage(){

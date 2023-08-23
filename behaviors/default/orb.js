@@ -317,7 +317,7 @@ class SpawnActor{
     }
 
     waitReflect(){
-        this.future(20000).reflectSpawn();
+        this.future(10000).reflectSpawn();
     }
     reflectSpawn(){
         this.publish("reflect", "spawn");
@@ -404,7 +404,7 @@ class MessageBlipActor {
     step() {
         this.updatePositionBy(0.01);
         if(!this.deleting){
-            this.future(100).step();
+            this.future(50).step();
         }
     }
 
