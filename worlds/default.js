@@ -205,10 +205,11 @@ export function init(Constants) {
        {
             card: {
                 name: "star",
-                type: "object",
-                translation: [1.5, 0, 10],
+                type: "3d",
+                dataLocation: "./assets/3D/trophy_brass_bell.glb",
+                translation: [1.5, 0, 6],
                 rotation: [0, 0, 0],
-                behaviorModules: ["Star", "SpawnOrrery"],
+                behaviorModules: [ "SpawnOrrery"],
                 dataScale: [1, 1, 1],
             }
         },
